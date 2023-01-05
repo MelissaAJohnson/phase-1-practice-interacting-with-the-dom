@@ -5,6 +5,7 @@ const node = document.getElementById('counter');
 const pauseButton = document.getElementById('pause');
 const incrementButton = document.getElementById('plus');
 const decrementButton = document.getElementById('minus');
+const form = document.querySelector('form');
 
 // Set the timer increment every second once page is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
             node.innerHTML = counter;
 
             pauseButton.addEventListener("click", pauseCounter);
+            
+            // Add Comments
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                addComment(e.target.comment.value)
+                form.reset()
+            })
             
         }, 1000)
     }
@@ -26,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
         incrementButton.addEventListener("click", function(){incrementCounter(counter)});
 
         decrementButton.addEventListener("click", function(){decrementCounter(counter)});
+    }
+
+    // Add comment
+    function addComment(comment) {
+        let newComment = document.createElement('p');
+        newComment.innerHTML += comment;
+        document.getElementById('list').appendChild(newComment);
     }
 })
 
